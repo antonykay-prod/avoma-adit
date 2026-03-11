@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avoma Calls Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Avoma Calls Dashboard</h1>
+        <p>Analyze call trends by date range, type, and outcome.</p>
+      </header>
+
+      <section class="filters card">
+        <div class="row">
+          <label>
+            API Token
+            <input id="apiToken" type="password" placeholder="fspp...:..." />
+          </label>
+          <label>
+            From Date
+            <input id="fromDate" type="date" />
+          </label>
+          <label>
+            To Date
+            <input id="toDate" type="date" />
+          </label>
+          <button id="loadBtn">Load Calls</button>
+        </div>
+        <small>
+          Uses endpoint: <code>https://platform-api.avoma.com/v1/meetings/</code> with
+          <code>X-Avoma-API-Type: platform</code>.
+        </small>
+      </section>
+
+      <section class="kpis grid-3">
+        <article class="card"><h3>Total Calls</h3><p id="totalCalls">0</p></article>
+        <article class="card"><h3>Avg Duration (min)</h3><p id="avgDuration">0</p></article>
+        <article class="card"><h3>Completed Calls</h3><p id="completedCalls">0</p></article>
+      </section>
+
+      <section class="charts grid-2">
+        <article class="card chart-card">
+          <h3>Call Volume Trend</h3>
+          <canvas id="volumeChart"></canvas>
+        </article>
+        <article class="card chart-card">
+          <h3>Call Type Distribution</h3>
+          <canvas id="typeChart"></canvas>
+        </article>
+        <article class="card chart-card full-width">
+          <h3>Outcome Distribution</h3>
+          <canvas id="outcomeChart"></canvas>
+        </article>
+      </section>
+
+      <section class="card table-card">
+        <h3>Call Details</h3>
+        <div id="status">Select a date range and click "Load Calls".</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Start</th>
+              <th>Subject</th>
+              <th>Type</th>
+              <th>Outcome</th>
+              <th>Duration (min)</th>
+              <th>State</th>
+              <th>Organizer</th>
+            </tr>
+          </thead>
+          <tbody id="callsTableBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
